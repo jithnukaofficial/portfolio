@@ -1,0 +1,25 @@
+FROM node:20-alpine
+
+# Security: run as non-root
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+WORKDIR /app
+
+# Install deps first (cache layer)
+COPY backend/package*.json ./
+RUN npm ci --production && npm cache clean --force
+
+# Copy source
+COPY backend/ .
+
+# Own files
+RUN chown -R appuser:appgroup /app
+
+USER appuser
+
+EXPOSE 5000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s \
+  CMD wget -qO- http://localhost:5000/api/health || exit 1
+
+CMD ["node", "server.js"]

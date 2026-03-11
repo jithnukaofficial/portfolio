@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { cursor: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #080c10;
+    color: #e8f4f8;
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #080c10; }
+  ::-webkit-scrollbar-thumb { background: #1e2d3d; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00d4ff; }
+  ::selection { background: rgba(0,212,255,0.2); color: #00d4ff; }
+}
+
+@layer components {
+  .section-label {
+    @apply text-accent text-xs tracking-[0.35em] uppercase mb-4 flex items-center gap-4;
+  }
+  .section-label::after {
+    content: '';
+    @apply flex-1 max-w-[80px] h-px bg-accent opacity-40;
+  }
+  .section-title {
+    @apply font-syne font-extrabold text-4xl leading-tight tracking-tight mb-16;
+  }
+  .btn-primary {
+    @apply bg-accent text-bg font-syne font-bold text-xs tracking-widest uppercase
+           px-8 py-4 transition-all duration-300 inline-flex items-center gap-2;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { @apply bg-accent2 -translate-y-0.5; }
+  .btn-outline {
+    @apply bg-transparent text-text font-syne font-bold text-xs tracking-widest uppercase
+           px-8 py-4 border border-border transition-all duration-300 inline-flex items-center gap-2;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-outline:hover { @apply border-accent text-accent -translate-y-0.5; }
+  .form-field {
+    @apply bg-surface border border-border text-text px-4 py-3
+           font-mono text-sm outline-none transition-colors duration-300 w-full;
+  }
+  .form-field:focus { @apply border-accent; }
+  .form-field::placeholder { @apply text-muted; }
+  .skill-tag {
+    @apply px-3 py-1.5 text-xs border border-accent/15 bg-accent/5
+           text-text transition-all duration-200 tracking-wide;
+  }
+  .skill-tag:hover { @apply bg-accent/15 border-accent text-accent; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #00d4ff, #00ff9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.35;
+  }
+}
