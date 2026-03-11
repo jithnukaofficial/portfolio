@@ -99,7 +99,7 @@ su - $APP_USER -c "
         -v /usr/bin/podman:/usr/bin/podman \
         -v /run/user/\$(id -u)/podman/podman.sock:/var/run/docker.sock \
         -e JAVA_OPTS='-Djenkins.install.runSetupWizard=false' \
-        jenkins/jenkins:lts-jdk17
+        docker.io/jenkins/jenkins:lts-jdk17
 "
 
 # ── 9. Portainer (Container GUI) ─────────────────────────
@@ -111,7 +111,7 @@ su - $APP_USER -c "
         -p 9000:9000 \
         -v /run/user/\$(id -u)/podman/podman.sock:/var/run/docker.sock \
         -v portainer_data:/data \
-        portainer/portainer-ce:latest
+        docker.io/portainer/portainer-ce:latest
 "
 
 # ── 10. Clone & Setup App ─────────────────────────────────
